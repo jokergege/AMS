@@ -1,0 +1,13 @@
+# 应用名称
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ams_new?characterEncoding=utf-8&serverTimezone=UTC
+    username: 1906031113
+    password: gjl1244077
+    driver-class-name: com.mysql.cj.jdbc.Driver
+# 应用服务 WEB 访问端口
+server:
+  port: 8080
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.joker.ams.entity

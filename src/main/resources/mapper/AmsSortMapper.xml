@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joker.ams.dao.AmsSortDao">
+
+    <resultMap type="com.joker.ams.entity.AmsSort" id="AmsSortMap">
+        <result property="sortId" column="sort_id" jdbcType="INTEGER"/>
+        <result property="sortName" column="sort_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--allSorts-->
+    <select id="queryAllSort" resultMap="AmsSortMap">
+        select *
+        from ams_sort
+    </select>
+    <!--分页查询-->
+    <select id="getSortListByCurrent" resultMap="AmsSortMap">
+        select sort_id,
+               sort_name
+        from ams_sort limit #{start},#{size}
+    </select>
+    <!--查询记录个数-->
+    <select id="getSortCount" resultType="java.lang.Integer">
+        select count(*)
+        from ams_sort
+    </select>
+
+
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AmsSortMap">
+        select sort_id,
+               sort_name
+        from ams_sort
+        where sort_id = #{sortId}
+    </select>
+
+
+
+
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="sortId" useGeneratedKeys="true">
+        insert into ams_sort(sort_name)
+        values (#{sortName})
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update ams_sort
+        <set>
+            <if test="sortName != null and sortName != ''">
+                sort_name = #{sortName},
+            </if>
+        </set>
+        where sort_id = #{sortId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from ams_sort
+        where sort_id = #{sortId}
+    </delete>
+
+</mapper>
+
